@@ -88,15 +88,23 @@ def run_simulation(iterations, team_strengths):
 
 def show_results(record_counter):
     ordered_records = ['3-0', '3-1', '3-2', '2-3', '1-3', '0-3']
-
     st.write("Results:")
-    for team_name, records in record_counter.items():
-        st.write(f"{team_name}:")
+
+    # Create a table layout
+    header = "| Team | 3-0 | 3-1 | 3-2 | 2-3 | 1-3 | 0-3 |"
+    separator = "|------|-----|-----|-----|-----|-----|-----|"
+    st.write(header)
+    st.write(separator)
+
+    for team_name in team_strengths:  # This ensures that even teams with no results are shown
+        records = record_counter.get(team_name, {})
         total = sum(records.values())
+        row = f"| {team_name} | "
         for record in ordered_records:
             count = records.get(record, 0)
-            percentage = (count / total) * 100
-            st.write(f"{record} ({percentage:.2f}%)")
+            percentage = (count / total if total else 0) * 100
+            row += f"{percentage:.2f}% | "
+        st.write(row)
 
 st.title("Lol World Swiss Tool")
 st.write("This is a simple Streamlit app that simulates League of Legends World Swiss Matches.")

@@ -2,6 +2,13 @@ import streamlit as st
 import random
 from collections import defaultdict
 
+# Create sliders for each team's strength
+team_names = ["T1", "TL", "C9", "MAD", "GEN", "GAM", "JDG", "BDS", "G2", "DK", "NRG", "WBG", "FNC", "LNG", "BLG", "KT"]
+team_strengths = {}
+
+for name in team_names:
+    team_strengths[name] = st.slider(f"Strength of {name}", 1, 10, 5)
+
 def run_simulation(iterations):
     record_counter = defaultdict(lambda: defaultdict(int))
 
@@ -95,6 +102,7 @@ def show_results(record_counter):
 st.title("Lol World Swiss Tool")
 st.write("This is a simple Streamlit app that simulates League of Legends World Swiss Matches.")
 iterations = st.slider("Number of Simulations", 100, 10000, 5000)
+
 
 if st.button("Run Simulation"):
     record_counter = run_simulation(iterations)

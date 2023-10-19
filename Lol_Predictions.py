@@ -106,6 +106,9 @@ for name in team_names:
 # Slider for the number of iterations
 iterations = st.slider("Number of Simulations", 100, 1000000, 50000)
 
+record_counter = None
+debug_info = []
+
 # Run Simulation Button
 if st.button("Run Simulation"):
     debug_mode = st.checkbox("Enable Debugging")

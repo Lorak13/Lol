@@ -13,10 +13,12 @@ def run_simulation(iterations, team_strengths):
 
     for _ in range(iterations):
 
-        def simulate_match(team1, team2):
-            total_strength = team1['strength'] + team2['strength']
-            rand_num = random.random()
-            return 'team1' if rand_num < (team1['strength'] / total_strength) else 'team2'
+        def simulate_match(team1_name, team2_name):
+             team1 = teams[team1_name]
+             team2 = teams[team2_name]
+             total_strength = team1['strength'] + team2['strength']
+             rand_num = random.random()
+             return team1_name if rand_num < (team1['strength'] / total_strength) else team2_name
 
             # Round 1 matchups
         round1_matchups = [("T1", "TL"), ("C9", "MAD"), ("GEN", "GAM"), ("JDG", "BDS"),
@@ -26,14 +28,14 @@ def run_simulation(iterations, team_strengths):
         for team1_name, team2_name in round1_matchups:
                 team1 = teams[team1_name]
                 team2 = teams[team2_name]
-                winner = simulate_match(team1, team2)
-                if winner == 'team1':
+                winner_name = simulate_match(team1_name, team2_name)
+                if winner_name == team1_name:
                     team1['wins'] += 1
                     team2['losses'] += 1
                 else:
                     team2['wins'] += 1
                     team1['losses'] += 1
-
+    
             # Record lookup
         record_lookup = {
                 2: [(1, 0), (0, 1)],

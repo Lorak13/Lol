@@ -18,25 +18,6 @@ def run_simulation(iterations, team_strengths):
             rand_num = random.random()
             return 'team1' if rand_num < (team1['strength'] / total_strength) else 'team2'
 
-        teams = {
-            "T1": {"strength": 8, "wins": 0, "losses": 0},
-            "TL": {"strength": 1.5, "wins": 0, "losses": 0},
-            "C9": {"strength": 1.5, "wins": 0, "losses": 0},
-            "MAD": {"strength": 4, "wins": 0, "losses": 0},
-            "GEN": {"strength": 9, "wins": 0, "losses": 0},
-            "GAM": {"strength": 1.5, "wins": 0, "losses": 0},
-            "JDG": {"strength": 10, "wins": 0, "losses": 0},
-            "BDS": {"strength": 2, "wins": 0, "losses": 0},
-            "G2": {"strength": 7, "wins": 0, "losses": 0},
-            "DK": {"strength": 7, "wins": 0, "losses": 0},
-            "NRG": {"strength": 1.5, "wins": 0, "losses": 0},
-            "WBG": {"strength": 7, "wins": 0, "losses": 0},
-            "FNC": {"strength": 5.5, "wins": 0, "losses": 0},
-            "LNG": {"strength": 9, "wins": 0, "losses": 0},
-            "BLG": {"strength": 8, "wins": 0, "losses": 0},
-            "KT": {"strength": 7.5, "wins": 0, "losses": 0},
-        }
-
             # Round 1 matchups
         round1_matchups = [("T1", "TL"), ("C9", "MAD"), ("GEN", "GAM"), ("JDG", "BDS"),
                               ("G2", "DK"), ("NRG", "WBG"), ("FNC", "LNG"), ("BLG", "KT")]

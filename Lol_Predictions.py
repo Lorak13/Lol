@@ -114,10 +114,10 @@ team_names = ["T1", "TL", "C9", "MAD", "GEN", "GAM", "JDG", "BDS", "G2", "DK", "
 team_strengths = {}
 
 for name in team_names:
-    team_strengths[name] = st.slider(f"Strength of {name}", 1, 10, 5)
+    team_strengths[name] = st.slider(f"Strength of {name}", 1, 100, 50)
 
 # Slider for the number of iterations
-iterations = st.slider("Number of Simulations", 100, 10000, 5000)
+iterations = st.slider("Number of Simulations", 100, 1000000, 50000)
 
 # Run Simulation Button
 if st.button("Run Simulation"):

@@ -13,6 +13,9 @@ def run_simulation(iterations, team_strengths):
 
     for _ in range(iterations):
 
+        if debug_mode:
+            debug_info.append("Entering iteration")
+            
         def simulate_match(team1, team2):
             total_strength = team1['strength'] + team2['strength']
             rand_num = random.random()
@@ -64,8 +67,11 @@ def run_simulation(iterations, team_strengths):
         for team_name, team in teams.items():
             record = f"{team['wins']}-{team['losses']}"
             record_counter[team_name][record] += 1
-
-    return record_counter
+        
+        if debug_mode:
+                debug_info.append(f"Updating record for {team_name}: {record}")
+    
+    return record_counter, debug_info
 
 def show_results(record_counter):
     ordered_records = ['3-0', '3-1', '3-2', '2-3', '1-3', '0-3']
@@ -102,13 +108,9 @@ iterations = st.slider("Number of Simulations", 100, 1000000, 50000)
 
 # Run Simulation Button
 if st.button("Run Simulation"):
+    debug_mode = st.checkbox("Enable Debugging")
     record_counter = run_simulation(iterations, team_strengths)
     show_results(record_counter)
-
-debug_mode = st.checkbox("Enable Debugging")
-
-if debug_mode:
-    st.write(f"Entering iteration")
-
-if debug_mode:
-    st.write(f"Updating record for {team_name}: {record}")
+    if debug_mode:
+        for msg in debug_info:
+            st.write(msg)

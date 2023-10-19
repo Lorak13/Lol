@@ -112,7 +112,7 @@ debug_info = []
 
 # Run Simulation Button
 if st.button("Run Simulation"):
-
+st.write("Button was clicked. Running simulation now...")  # Debugging line
     record_counter, debug_info = run_simulation(iterations, team_strengths, debug_mode)
     show_results(record_counter)
     if debug_mode:

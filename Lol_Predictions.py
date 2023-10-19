@@ -86,13 +86,13 @@ def run_simulation(iterations, team_strengths):
 
     return record_counter
 
-def show_results(record_counter):
+def show_results(record_counter, team_strengths):
     ordered_records = ['3-0', '3-1', '3-2', '2-3', '1-3', '0-3']
-    st.write("Results:")
+    st.write("This table shows the probability for every team to finish with a certain record at the end of the swiss stage:")
 
     # Create a table layout
-    header = "| Team | 3-0 | 3-1 | 3-2 | 2-3 | 1-3 | 0-3 |"
-    separator = "|------|-----|-----|-----|-----|-----|-----|"
+    header = "| Team | 3-0 | 3-1 | 3-2 | 2-3 | 1-3 | 0-3 | Qualification Probability |"
+    separator = "|------|-----|-----|-----|-----|-----|-----|-------------------------|"
     st.write(header)
     st.write(separator)
 
@@ -100,14 +100,19 @@ def show_results(record_counter):
         records = record_counter.get(team_name, {})
         total = sum(records.values())
         row = f"| {team_name} | "
+        qualification_prob = 0
         for record in ordered_records:
             count = records.get(record, 0)
             percentage = (count / total if total else 0) * 100
+            if record in ['3-0', '3-1', '3-2']:
+                qualification_prob += percentage
             row += f"{percentage:.2f}% | "
+        row += f"{qualification_prob:.2f}% |"
         st.write(row)
 
 st.title("Lol World Swiss Tool")
 st.write("This is a simple Streamlit app that simulates League of Legends World Swiss Matches.")
+st.write("Estimated team strength from 1-100 will dictate the win % in any matchup by formula: Team_Strength / (Team_strength + Opponent_Strength)")
 
 # Create sliders for each team's strength
 team_names = ["T1", "TL", "C9", "MAD", "GEN", "GAM", "JDG", "BDS", "G2", "DK", "NRG", "WBG", "FNC", "LNG", "BLG", "KT"]

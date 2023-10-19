@@ -68,12 +68,12 @@ def run_simulation(iterations, team_strengths, debug_mode):
         for team_name, team in teams.items():
             record = f"{team['wins']}-{team['losses']}"
             record_counter[team_name][record] += 1
-            print(f"Debug: Updating record for {team_name}: {record}")  # Debugging line
+            if debug_mode:
+            st.write(f"Debug: Updating record for {team_name}: {record}")  # Debugging line
         
         if debug_mode:
                 debug_info.append(f"Updating record for {team_name}: {record}")
-
-    print(f"Debug: Final record counter {record_counter}")  # Debugging line
+                st.write(f"Debug: Final record counter {record_counter}")  # Debugging line
     
     return record_counter, debug_info
 

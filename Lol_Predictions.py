@@ -105,7 +105,7 @@ for name in team_names:
     team_strengths[name] = st.slider(f"Strength of {name}", 1, 100, 50)
 
 # Slider for the number of iterations
-iterations = st.slider("Number of Simulations", 100, 1000000, 50000)
+iterations = st.slider("Number of Simulations", 100, 100000, 50000)
 
 debug_mode = st.checkbox("Enable Debugging")
 record_counter = None

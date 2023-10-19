@@ -5,16 +5,17 @@ from collections import defaultdict
 
 def run_simulation(iterations, team_strengths):
     record_counter = defaultdict(lambda: defaultdict(int))
+    debug_info = []  # Initialize a list to store debug info
 
     teams = {
         name: {"strength": team_strengths[name], "wins": 0, "losses": 0} 
         for name in team_strengths
     }
 
-    for _ in range(iterations):
-
-        if debug_mode:
-            debug_info.append("Entering iteration")
+    for i in range(iterations):
+    
+    if debug_mode:
+            debug_info.append(f"Running iteration {i}")
             
         def simulate_match(team1, team2):
             total_strength = team1['strength'] + team2['strength']

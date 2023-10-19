@@ -127,4 +127,4 @@ iterations = st.slider("Number of Simulations", 100, 1000000, 50000)
 # Run Simulation Button
 if st.button("Run Simulation"):
     record_counter = run_simulation(iterations, team_strengths)
-    show_results(record_counter)
+    show_results(record_counter, team_strengths)

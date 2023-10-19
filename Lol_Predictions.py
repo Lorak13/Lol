@@ -14,7 +14,7 @@ def run_simulation(iterations, team_strengths):
 
     for i in range(iterations):
     
-    if debug_mode:
+        if debug_mode:
             debug_info.append(f"Running iteration {i}")
             
         def simulate_match(team1, team2):

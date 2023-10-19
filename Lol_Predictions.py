@@ -13,12 +13,29 @@ def run_simulation(iterations, team_strengths):
 
     for _ in range(iterations):
 
-        def simulate_match(team1_name, team2_name):
-             team1 = teams[team1_name]
-             team2 = teams[team2_name]
-             total_strength = team1['strength'] + team2['strength']
-             rand_num = random.random()
-             return team1_name if rand_num < (team1['strength'] / total_strength) else team2_name
+        def simulate_match(team1, team2):
+            total_strength = team1['strength'] + team2['strength']
+            rand_num = random.random()
+            return 'team1' if rand_num < (team1['strength'] / total_strength) else 'team2'
+
+        teams = {
+            "T1": {"strength": 8, "wins": 0, "losses": 0},
+            "TL": {"strength": 1.5, "wins": 0, "losses": 0},
+            "C9": {"strength": 1.5, "wins": 0, "losses": 0},
+            "MAD": {"strength": 4, "wins": 0, "losses": 0},
+            "GEN": {"strength": 9, "wins": 0, "losses": 0},
+            "GAM": {"strength": 1.5, "wins": 0, "losses": 0},
+            "JDG": {"strength": 10, "wins": 0, "losses": 0},
+            "BDS": {"strength": 2, "wins": 0, "losses": 0},
+            "G2": {"strength": 7, "wins": 0, "losses": 0},
+            "DK": {"strength": 7, "wins": 0, "losses": 0},
+            "NRG": {"strength": 1.5, "wins": 0, "losses": 0},
+            "WBG": {"strength": 7, "wins": 0, "losses": 0},
+            "FNC": {"strength": 5.5, "wins": 0, "losses": 0},
+            "LNG": {"strength": 9, "wins": 0, "losses": 0},
+            "BLG": {"strength": 8, "wins": 0, "losses": 0},
+            "KT": {"strength": 7.5, "wins": 0, "losses": 0},
+        }
 
             # Round 1 matchups
         round1_matchups = [("T1", "TL"), ("C9", "MAD"), ("GEN", "GAM"), ("JDG", "BDS"),
@@ -28,14 +45,14 @@ def run_simulation(iterations, team_strengths):
         for team1_name, team2_name in round1_matchups:
                 team1 = teams[team1_name]
                 team2 = teams[team2_name]
-                winner_name = simulate_match(team1_name, team2_name)
-                if winner_name == team1_name:
+                winner = simulate_match(team1, team2)
+                if winner == 'team1':
                     team1['wins'] += 1
                     team2['losses'] += 1
                 else:
                     team2['wins'] += 1
                     team1['losses'] += 1
-    
+
             # Record lookup
         record_lookup = {
                 2: [(1, 0), (0, 1)],
@@ -69,13 +86,13 @@ def run_simulation(iterations, team_strengths):
 
     return record_counter
 
-def show_results(record_counter, team_strengths):
+def show_results(record_counter):
     ordered_records = ['3-0', '3-1', '3-2', '2-3', '1-3', '0-3']
-    st.write("This table shows the probability for every team to finish with a certain record at the end of the swiss stage:")
+    st.write("Results:")
 
     # Create a table layout
-    header = "| Team | 3-0 | 3-1 | 3-2 | 2-3 | 1-3 | 0-3 | Qualification Probability |"
-    separator = "|------|-----|-----|-----|-----|-----|-----|-------------------------|"
+    header = "| Team | 3-0 | 3-1 | 3-2 | 2-3 | 1-3 | 0-3 |"
+    separator = "|------|-----|-----|-----|-----|-----|-----|"
     st.write(header)
     st.write(separator)
 
@@ -83,19 +100,14 @@ def show_results(record_counter, team_strengths):
         records = record_counter.get(team_name, {})
         total = sum(records.values())
         row = f"| {team_name} | "
-        qualification_prob = 0
         for record in ordered_records:
             count = records.get(record, 0)
             percentage = (count / total if total else 0) * 100
-            if record in ['3-0', '3-1', '3-2']:
-                qualification_prob += percentage
             row += f"{percentage:.2f}% | "
-        row += f"{qualification_prob:.2f}% |"
         st.write(row)
 
 st.title("Lol World Swiss Tool")
 st.write("This is a simple Streamlit app that simulates League of Legends World Swiss Matches.")
-st.write("Estimated team strength from 1-100 will dictate the win % in any matchup by formula: Team_Strength / (Team_strength + Opponent_Strength)")
 
 # Create sliders for each team's strength
 team_names = ["T1", "TL", "C9", "MAD", "GEN", "GAM", "JDG", "BDS", "G2", "DK", "NRG", "WBG", "FNC", "LNG", "BLG", "KT"]
@@ -110,4 +122,4 @@ iterations = st.slider("Number of Simulations", 100, 1000000, 50000)
 # Run Simulation Button
 if st.button("Run Simulation"):
     record_counter = run_simulation(iterations, team_strengths)
-    show_results(record_counter, team_strengths)
+    show_results(record_counter)

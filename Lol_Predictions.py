@@ -13,7 +13,11 @@ def run_simulation(iterations, team_strengths, debug_mode):
     }
 
     for i in range(iterations):
-    
+
+    teams = {
+        name: {"strength": team_strengths[name], "wins": 0, "losses": 0} 
+        for name in team_strengths
+    }
         if debug_mode:
             debug_info.append(f"Running iteration {i}")
             

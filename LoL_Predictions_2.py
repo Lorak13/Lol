@@ -27,8 +27,8 @@ def run_simulation(iterations, team_strengths, debug_mode):
             return 'team1' if rand_num < (team1['strength'] / total_strength) else 'team2'
 
             # Round 1 matchups
-        round1_matchups = [("T1", "TL"), ("C9", "MAD"), ("GEN", "GAM"), ("JDG", "BDS"),
-                              ("G2", "DK"), ("NRG", "WBG"), ("FNC", "LNG"), ("BLG", "KT")]
+        round1_matchups = [("G2", "GEN"), ("JDG", "LNG"), ("NRG", "MAD"), ("T1", "C9"),
+                    ("KT", "WBG"), ("BLG", "FNC"), ("DK", "BDS"), ("TL", "GAM")]
 
             # Round 1 simulation
         for team1_name, team2_name in round1_matchups:
@@ -44,13 +44,11 @@ def run_simulation(iterations, team_strengths, debug_mode):
 
             # Record lookup
         record_lookup = {
-                2: [(1, 0), (0, 1)],
-                3: [(2, 0), (1, 1), (0, 2)],
-                4: [(2, 1), (1, 2)],
-                5: [(2, 2)]
-            }
+        2: [(1, 0), (0, 1)],
+        3: [(1, 1), (2, 0), (0, 2)]  # Changed to 2-0 and 0-2 instead of 2, 3, 4, 5
+        }
 
-            # Round 2-5 simulation
+            # Round 2-3 simulation
         for round_num, records in record_lookup.items():
                 for wins, losses in records:
                     available_teams = [name for name, team in teams.items() if team['wins'] == wins and team['losses'] == losses]
@@ -60,7 +58,7 @@ def run_simulation(iterations, team_strengths, debug_mode):
                         team2_name = available_teams.pop()
                         team1 = teams[team1_name]
                         team2 = teams[team2_name]
-                        if team1['wins'] < 3 and team1['losses'] < 3 and team2['wins'] < 3 and team2['losses'] < 3:
+                        if team1['wins'] < 2 and team1['losses'] < 2 and team2['wins'] < 2 and team2['losses'] < 2:
                             winner = simulate_match(team1, team2)
                             if winner == 'team1':
                                 team1['wins'] += 1
@@ -82,12 +80,12 @@ def run_simulation(iterations, team_strengths, debug_mode):
     return record_counter, debug_info
 
 def show_results(record_counter):
-    ordered_records = ['3-0', '3-1', '3-2', '2-3', '1-3', '0-3']
+    ordered_records = ['2-0', '1-1', '0-2']
     st.write("Results:")
 
     # Create a table layout
-    header = "| Team | 3-0 | 3-1 | 3-2 | 2-3 | 1-3 | 0-3 |"
-    separator = "|------|-----|-----|-----|-----|-----|-----|"
+    header = "| Team | 2-0 | 1-1 | 0-2 |"
+    separator = "|------|-----|-----|-----|"
     st.write(header)
     st.write(separator)
 

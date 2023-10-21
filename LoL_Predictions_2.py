@@ -12,12 +12,35 @@ def run_simulation(iterations, team_strengths, debug_mode):
         for name in team_strengths
     }
 
+    initial_records = {
+    'G2': {'wins': 1, 'losses': 0},
+    'GEN': {'wins': 1, 'losses': 0},
+    'JDG': {'wins': 1, 'losses': 0},
+    'LNG': {'wins': 1, 'losses': 0},
+    'NRG': {'wins': 0, 'losses': 0},
+    'MAD': {'wins': 0, 'losses': 0},
+    'T1': {'wins': 0, 'losses': 0},
+    'C9': {'wins': 0, 'losses': 0},
+    'KT': {'wins': 0, 'losses': 0},
+    'WBG': {'wins': 0, 'losses': 0},
+    'BLG': {'wins': 0, 'losses': 0},
+    'FNC': {'wins': 0, 'losses': 0},
+    'DK': {'wins': 0, 'losses': 1},
+    'BDS': {'wins': 0, 'losses': 1},
+    'TL': {'wins': 0, 'losses': 1},
+    'GAM': {'wins': 0, 'losses': 1},
+    }
+    
     for i in range(iterations):
 
         teams = {
-        name: {"strength": team_strengths[name], "wins": 0, "losses": 0} 
-        for name in team_strengths
+        name: {
+            "strength": team_strengths[name],
+            "wins": initial_records[name]['wins'],
+            "losses": initial_records[name]['losses']
         }
+        for name in team_strengths
+
         if debug_mode:
             debug_info.append(f"Running iteration {i}")
             

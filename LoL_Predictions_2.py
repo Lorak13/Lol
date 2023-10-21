@@ -80,12 +80,12 @@ def run_simulation(iterations, team_strengths, debug_mode):
     return record_counter, debug_info
 
 def show_results(record_counter):
-    ordered_records = ['2-0', '1-1', '0-2']
+    ordered_records = ['2-0', '2-1', '1-2', '0-2']
     st.write("Results:")
 
     # Create a table layout
-    header = "| Team | 2-0 | 1-1 | 0-2 |"
-    separator = "|------|-----|-----|-----|"
+    header = "| Team | 2-0 | 2-1 | 1-2 | 0-2 |"
+    separator = "|------|-----|-----|-----|-----|"
     st.write(header)
     st.write(separator)
 

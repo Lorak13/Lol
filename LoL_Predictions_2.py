@@ -13,10 +13,10 @@ def run_simulation(iterations, team_strengths, debug_mode):
     }
 
     initial_records = {
-    'G2': {'wins': 1, 'losses': 0},
-    'GEN': {'wins': 1, 'losses': 0},
-    'JDG': {'wins': 1, 'losses': 0},
-    'LNG': {'wins': 1, 'losses': 0},
+    'G2': {'wins': 1, 'losses': 1},
+    'GEN': {'wins': 2, 'losses': 0},
+    'JDG': {'wins': 2, 'losses': 0},
+    'LNG': {'wins': 1, 'losses': 1},
     'NRG': {'wins': 0, 'losses': 0},
     'MAD': {'wins': 0, 'losses': 0},
     'T1': {'wins': 0, 'losses': 0},
@@ -44,6 +44,15 @@ def run_simulation(iterations, team_strengths, debug_mode):
 
         if debug_mode:
             debug_info.append(f"Running iteration {i}")
+
+        teams['JDG']['wins'] = 2
+        teams['JDG']['losses'] = 0
+        teams['GEN']['wins'] = 2
+        teams['GEN']['losses'] = 0
+        teams['LNG']['wins'] = 0
+        teams['LNG']['losses'] = 2
+        teams['G2']['wins'] = 0
+        teams['G2']['losses'] = 2
             
         def simulate_match(team1, team2):
             total_strength = team1['strength'] + team2['strength']

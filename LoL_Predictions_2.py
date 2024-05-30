@@ -2,7 +2,6 @@ import streamlit as st
 import random
 from collections import defaultdict
 
-
 def run_simulation(iterations, team_strengths, debug_mode):
     record_counter = defaultdict(lambda: defaultdict(int))
     debug_info = []  # Initialize a list to store debug info

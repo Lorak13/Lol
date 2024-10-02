@@ -85,9 +85,9 @@ def show_results(record_counter):
     ordered_records = ['3-0', '3-1', '3-2', '2-3', '1-3', '0-3']
     st.write("Results:")
 
-    # Create a table layout
-    header = "| Team | 3-0 | 3-1 | 3-2 | 2-3 | 1-3 | 0-3 |"
-    separator = "|------|-----|-----|-----|-----|-----|-----|"
+    # Create a table layout with the added 'Total Qualify Chance' column
+    header = "| Team | 3-0 | 3-1 | 3-2 | 2-3 | 1-3 | 0-3 | Total Qualify Chance |"
+    separator = "|------|-----|-----|-----|-----|-----|-----|----------------------|"
     st.write(header)
     st.write(separator)
 
@@ -95,10 +95,16 @@ def show_results(record_counter):
         records = record_counter.get(team_name, {})
         total = sum(records.values())
         row = f"| {team_name} | "
+        qualify_chance = 0  # Initialize the qualify chance sum
+
         for record in ordered_records:
             count = records.get(record, 0)
             percentage = (count / total if total else 0) * 100
             row += f"{percentage:.2f}% | "
+            if record in ['3-0', '3-1', '3-2']:  # Sum up the chances for qualifying
+                qualify_chance += percentage
+
+        row += f"{qualify_chance:.2f}% |"  # Add the total qualify chance to the row
         st.write(row)
 
 st.title("Lol World Swiss Tool")

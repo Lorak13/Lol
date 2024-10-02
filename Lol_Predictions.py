@@ -27,8 +27,8 @@ def run_simulation(iterations, team_strengths, debug_mode):
             return 'team1' if rand_num < (team1['strength'] / total_strength) else 'team2'
 
             # Round 1 matchups
-        round1_matchups = [("T1", "TL"), ("C9", "MAD"), ("GEN", "GAM"), ("JDG", "BDS"),
-                              ("G2", "DK"), ("NRG", "WBG"), ("FNC", "LNG"), ("BLG", "KT")]
+        round1_matchups = [("HWL", "PSG"), ("FLY", "GAM"), ("G2", "Pain"), ("BLB", "MAD"),
+                              ("TES", "T1"), ("TL", "LNG"), ("FNC", "DAM"), ("GEN", "WBG")]
 
             # Round 1 simulation
         for team1_name, team2_name in round1_matchups:
@@ -105,7 +105,7 @@ st.title("Lol World Swiss Tool")
 st.write("This is a simple Streamlit app that simulates League of Legends World Swiss Matches.")
 
 # Create sliders for each team's strength
-team_names = ["T1", "TL", "C9", "MAD", "GEN", "GAM", "JDG", "BDS", "G2", "DK", "NRG", "WBG", "FNC", "LNG", "BLG", "KT"]
+team_names = ["BLB", "GEN", "HWL", "TES", "T1", "LNG", "WBG", "DAM", "G2", "FNC", "MAD", "FLY", "TL", "GAM", "PSG", "Pain"]
 team_strengths = {}
 
 for name in team_names:

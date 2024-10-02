@@ -108,8 +108,7 @@ def show_results(record_counter):
         st.write(row)
 
 st.title("Lol World Swiss Tool")
-st.write("This is a simple Streamlit app that simulates League of Legends World Swiss Matches.
-           Guide: Input team strength as relative among all teams. The algorithm will use relative strengh to determine winning odds, i.e 40 vs 80 rating -> 33% to 66% winning odds")
+st.write("This is a simple Streamlit app that simulates League of Legends World Swiss Matches. Guide: Input team strength as relative among all teams. The algorithm will use relative strengh to determine winning odds, i.e 40 vs 80 rating -> 33% to 66% winning odds")
 
 # Create sliders for each team's strength
 team_names = ["BLG", "GEN", "HLE", "TES", "T1", "LNG", "WBG", "DK", "G2", "FNC", "MAD", "FLY", "TL", "GAM", "PSG", "Pain"]

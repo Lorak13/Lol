@@ -27,8 +27,8 @@ def run_simulation(iterations, team_strengths, debug_mode):
             return 'team1' if rand_num < (team1['strength'] / total_strength) else 'team2'
 
             # Round 1 matchups
-        round1_matchups = [("HWL", "PSG"), ("FLY", "GAM"), ("G2", "Pain"), ("BLB", "MAD"),
-                              ("TES", "T1"), ("TL", "LNG"), ("FNC", "DAM"), ("GEN", "WBG")]
+        round1_matchups = [("HLE", "PSG"), ("FLY", "GAM"), ("G2", "Pain"), ("BLG", "MAD"),
+                              ("TES", "T1"), ("TL", "LNG"), ("FNC", "DK"), ("GEN", "WBG")]
 
             # Round 1 simulation
         for team1_name, team2_name in round1_matchups:
@@ -108,10 +108,11 @@ def show_results(record_counter):
         st.write(row)
 
 st.title("Lol World Swiss Tool")
-st.write("This is a simple Streamlit app that simulates League of Legends World Swiss Matches.")
+st.write("This is a simple Streamlit app that simulates League of Legends World Swiss Matches.
+           Guide: Input team strength as relative among all teams. The algorithm will use relative strengh to determine winning odds, i.e 40 vs 80 rating -> 33% to 66% winning odds")
 
 # Create sliders for each team's strength
-team_names = ["BLB", "GEN", "HWL", "TES", "T1", "LNG", "WBG", "DAM", "G2", "FNC", "MAD", "FLY", "TL", "GAM", "PSG", "Pain"]
+team_names = ["BLG", "GEN", "HLE", "TES", "T1", "LNG", "WBG", "DK", "G2", "FNC", "MAD", "FLY", "TL", "GAM", "PSG", "Pain"]
 team_strengths = {}
 
 for name in team_names:
